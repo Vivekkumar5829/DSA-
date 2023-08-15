@@ -16,7 +16,7 @@ public class Main {
        }
         System.out.println(Arrays.toString(arr));
 
-//Move all zeroes to the end of an array.
+2.//Move all zeroes to the end of an array.
 
         int count = 0;
         for(int i = 0; i < arr.length; i++){
@@ -34,7 +34,7 @@ public class Main {
     }
 }
 
-2. //Rearrange the array such that even positioned are greater than odd
+3. //Rearrange the array such that even positioned are greater than odd
 
 import java.util.Arrays;
 
