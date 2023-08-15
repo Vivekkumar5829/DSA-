@@ -1,0 +1,30 @@
+import java.util.Arrays;
+// Find the largest three distinct elements in an array
+// Find the Second-largest element in the array
+class Test{
+    public static void main(String[] args) {
+        int[] arr = {12,13,1,10,34,1};
+        largest(arr);
+    }
+// Here if we make return type int and we return the second then we will get the second-largest element in the array.
+
+    public static void largest(int[] arr){
+        int first, second, third;
+        first = second = third = Integer.MIN_VALUE;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > first){
+                third = second;
+                second = first;
+                first = arr[i];
+            }
+            else if(arr[i] > second){
+                third = second;
+                second = arr[i];
+            }else if(arr[i] > third){
+                third = arr[i];
+            }
+        }
+        System.out.println( "The largest 3 distinct element in an array " +first + " " + second + " " + third);
+
+    }
+}
