@@ -1,11 +1,14 @@
-import java.util.Arrays;
+
 // Find the largest three distinct elements in an array
 // Find the Second-largest element in the array
+
+import java.util.Arrays;
 class Test{
     public static void main(String[] args) {
         int[] arr = {12,13,1,10,34,1};
         largest(arr);
     }
+
 // Here if we make return type int and we return the second then we will get the second-largest element in the array.
 
     public static void largest(int[] arr){
@@ -28,3 +31,4 @@ class Test{
 
     }
 }
+
