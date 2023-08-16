@@ -1,0 +1,24 @@
+1.//Segregate even and odd numbers using Lomuto’s Partition Scheme
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+class Test{
+    public static void main(String[] args) {
+        int[] arr = {7,2,9,4,6,3,8,5};
+        evenOdd(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void evenOdd(int[] arr){
+        int pivot = arr[arr.length - 1];
+        int i = 0;
+        for(int j = 0; j < arr.length;j++){
+            if(arr[j] % 2 == 0){
+                int temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+                i++;
+            }
+
+        }
