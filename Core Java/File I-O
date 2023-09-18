@@ -87,6 +87,41 @@ class P{
 }
 
 
+4.// Write a program to remove duplicates for given input files.
+
+import java.io.*;
+class P{
+    public static void main(String[] args) throws Exception {
+
+       PrintWriter pw = new PrintWriter("output.txt");
+       BufferedReader br1 = new BufferedReader(new FileReader("input.txt"));
+       String line = br1.readLine();
+       while (line != null){
+           boolean available = false;
+           BufferedReader br2 = new BufferedReader(new FileReader("delete.txt"));
+           String target = br2.readLine();
+           while (target != null){
+               if(line.equals(target)){
+                   available = true;
+                   break;
+               }
+               target = br2.readLine();
+               if(available == false){
+                   pw.println(line);
+                   pw.flush();
+               }
+               line = br1.readLine();
+           }
+           
+       }
+
+        }
+}
+
+
+
+
+
 
 
 
