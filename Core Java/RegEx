@@ -15,3 +15,23 @@ class P{
 
     }
 }
+
+
+2.//Write a program to check weather the given mail ID is valid Mobile Number or not.
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+class P{
+    public static void main(String[] args) throws Exception {
+
+        Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher m = p.matcher(args[0]);
+
+        if(m.find() && m.group().equals(args[0])){
+            System.out.println("Valid Email ID");
+        }else {
+            System.out.println("Invalid Email ID");
+        }
+
+    }
+}
+
