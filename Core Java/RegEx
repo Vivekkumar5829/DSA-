@@ -1,0 +1,17 @@
+1.// Write a program to check weather the given number is valid Mobile Number or not.
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+class P{
+    public static void main(String[] args) throws Exception {
+
+        Pattern p = Pattern.compile("(0|91)?[7-9][0-9]{9}");
+        Matcher m = p.matcher(args[0]);
+
+        if(m.find() && m.group().equals(args[0])){
+            System.out.println("Valid Mobile Number");
+        }else {
+            System.out.println("Invalid Mobile Number");
+        }
+
+    }
+}
