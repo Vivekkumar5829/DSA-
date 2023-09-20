@@ -35,3 +35,33 @@ class P{
     }
 }
 
+
+3.// Write a program to read all mobile numbers present in given input file where mobile number are matched with the Text Data.
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+class P{
+    public static void main(String[] args) throws Exception {
+
+        PrintWriter out = new PrintWriter("output.text");
+        Pattern P = Pattern.compile("(0|91)?[7-9][0-9]{9}");
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        String line = br.readLine();
+        
+        while (line != null){
+            Matcher m = P.matcher(line);
+            while (m.find()){
+                out.println(m.group());
+            }
+            line = br.readLine();
+        }
+        out.flush();
+        
+
+    }
+}
+
+
+
