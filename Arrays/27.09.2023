@@ -1,0 +1,210 @@
+1.//Count number of occurrences (or frequency) in a sorted array.
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1,2,2,2,2,3,4,7,88};
+        int n = arr.length;
+        int x = 88;
+        int z = countOccurrences(arr,x);
+        System.out.println(z);
+
+    }
+
+    public static int   binarySearch(int[] arr,int left,int right,int x){
+        while (left <= right){
+            int mid = left + (right - left)/2;
+            if(arr[mid] == x){
+                return mid;
+            } else if (arr[mid] > x) {
+                //right = mid - 1;
+                return binarySearch(arr,left,mid - 1,x);
+
+            }else {
+               // left = mid + 1;
+                return binarySearch(arr,mid + 1,right,x);
+            }
+        }
+        return -1;
+
+       }
+
+    public static int countOccurrences(int[] arr,int x){
+        int result = binarySearch(arr,0,arr.length - 1,x);
+        if(result == -1){
+            return 0;
+        }
+        int count = 1;
+        int left = result - 1;
+        while (left >= 0 && arr[left] == x){
+            count++;
+            left--;
+        }
+
+        int right = result + 1;
+        while (right < arr.length && arr[right] == x){
+            count++;
+            right++;
+        }
+        return count;
+
+
+    }
+
+}
+
+
+2.//Sort an array of 0s, 1s and 2s | Dutch National Flag problem.
+import java.util.Arrays;
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 0, 1, 2};
+        arrange(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void arrange(int[] arr){
+        int low = 0;
+        int mid = 0;
+        int high = arr.length - 1;
+        int temp = 0;
+
+        while (mid <= high){
+            switch (arr[mid]){
+                case 0: {
+                    temp = arr[low];
+                    arr[low] = arr[mid];
+                    arr[mid] = temp;
+                    mid++;
+                    low++;
+                    break;
+                }
+
+                case 1: {
+                    mid++;
+                    break;
+                }
+                case 2: {
+                    temp = arr[mid];
+                    arr[mid] = arr[high];
+                    arr[high] = temp;
+                    high--;
+                    break;
+                }
+            }
+        }
+    }
+
+
+
+}
+
+
+
+3.//Find Subarray with given sum.
+public class Practice {
+    public static void main(String[] args)
+    {
+        int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 };
+        int n = arr.length;
+        int sum = 23;
+        subArraySum(arr,n,sum);
+
+    }
+    static void subArraySum(int arr[], int n, int sum)
+    {
+        for (int i = 0; i < n; i++) {
+            int currentSum = arr[i];
+
+            if (currentSum == sum) {
+                System.out.println("Sum found at indexe "
+                        + i);
+                return;
+            }
+            else {
+                for (int j = i + 1; j < n; j++) {
+                    currentSum += arr[j];
+
+                    if (currentSum == sum) {
+                        System.out.println(
+                                "Sum found between indexes " + i
+                                        + " and " + j);
+                        return;
+                    }
+                }
+            }
+        }
+        System.out.println("No subarray found");
+        return;
+    }
+
+
+}
+
+
+
+4.//Move all negative numbers to beginning and positive to end with constant extra space.
+import java.util.Arrays;
+
+public class Practice {
+    public static void main(String[] args) {
+        int[] arr = { -12, 11, -13, -5, 6, -7, 5, -3, 11 };
+        negativeShift(arr,0,arr.length - 1);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void negativeShift(int[] arr,int left, int right){
+        while (left <= right){
+            if(arr[left] < 0 && arr[right] < 0){
+                left++;
+            } else if (arr[left] > 0 && arr[right] < 0) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            } else if (arr[left] > 0 && arr[right] > 0) {
+                right--;
+            } else{
+                left++;
+                right--;
+            }
+        }
+    }
+}
+
+
+
+5.//Union and Intersection of two sorted arrays.
+import java.util.*;
+
+class Practice {
+    public static void main(String[] args)
+    {
+        int arr1[] = { 1, 2, 2, 2, 3 };
+        int arr2[] = { 2, 3, 3, 4, 5, 5 };
+        int n = arr1.length;
+        int m = arr2.length;
+        System.out.println(union(arr1,arr2,n,m));
+    }
+
+    public static ArrayList<Integer> union(int arr1[], int arr2[], int n, int m)
+    {
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int i : arr1)
+            set.add(i);
+
+        for (int i : arr2)
+            set.add(i);
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i : set)
+            list.add(i);
+        return list;
+    }
+
+
+
+}
+
+
+
+
+
