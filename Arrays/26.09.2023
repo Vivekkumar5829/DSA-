@@ -1,0 +1,126 @@
+1.//Find a peak element which is not smaller than its neighbours.
+import java.util.ArrayList;
+import java.util.List;
+
+
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {10,20,15,2,23,90,67};
+        System.out.println(peak(arr));
+    }
+
+    public static List<Integer> peak(int[] arr){
+        List<Integer> peakElements = new ArrayList<>();
+        for(int i = 1; i < arr.length; i++){
+            if(arr[i] > arr[i - 1] && arr[i] > arr[i + 1]){
+                peakElements.add(arr[i]);
+            }
+        }
+        return peakElements;
+    }
+}
+
+
+
+2.//Program to find the minimum (or maximum) element of an array.
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 423, 6, 46, 34, 23, 13, 53, 4};
+        System.out.println("Minimum Element in the array " + min(arr) + " and  Maximum Element in the array is" + max(arr));
+
+    }
+
+    public static int min(int[] arr) {
+
+        int minNo = arr[0];
+        for (int x : arr) {
+            if (x < minNo) {
+                minNo = x;
+            }
+        }
+        return minNo;
+    }
+
+
+    public static int max(int[] arr) {
+
+        int maxNo = arr[0];
+        for (int x : arr) {
+            if (x > maxNo) {
+                maxNo = x;
+            }
+        }
+        return maxNo;
+    }
+}
+
+
+
+3.//Write a program to reverse an array.
+import java.util.Arrays;
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 423, 6, 46, 34, 23, 13, 53, 4};
+        reverse(arr,0,arr.length - 1);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void  reverse(int[] arr, int start, int end){
+
+        while (start < end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+}
+
+
+
+4.//Write a program to sort an array.
+import java.util.Arrays;
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 423, 6, 46, 34, 23, 13, 53, 4};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void  sort(int[] arr){
+       for (int i = 0; i < arr.length; i++){
+           for (int j = 1; j <= arr.length - i - 1; j++){
+               if(arr[j] < arr[j - 1]){
+                   int temp = arr[j];
+                   arr[j] = arr[j - 1];
+                   arr[j - 1] = temp;
+               }
+           }
+
+        }
+
+    }
+
+}
+
+
+
+5.//K’th Smallest/Largest Element in Unsorted Array.
+import java.util.Arrays;
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 423, 6, 46, 34, 23, 13, 53, 4};
+
+        System.out.println(KthLargest(arr,3));
+    }
+    public static int   KthLargest(int[] arr,int K){
+
+        Arrays.sort(arr);
+        return arr[K - 1];
+
+       }
+}
+
+
