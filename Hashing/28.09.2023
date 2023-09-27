@@ -1,0 +1,149 @@
+1.//Find whether an array is subset of another array.
+import java.util.HashSet;
+
+class Practice{
+    public static void main(String[] args) {
+        int arr1[] = { 11, 1, 13, 21, 3, 7 };
+        int arr2[] = { 11, 3, 7, 1, 22 };
+        System.out.println(isSubset(arr1,arr2));
+    }
+
+    public static boolean isSubset(int[] arr1, int[] arr2){
+        HashSet<Integer> collect = new HashSet<>();
+        for(int i = 0; i < arr1.length; i++){
+            if(!collect.contains(arr1[i])){
+                collect.add(arr1[i]);
+            }
+        }
+        for(int j = 0; j < arr2.length; j++){
+            if(!collect.contains(arr2[j])){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+2.//Program to Find the Frequency of Characters in a String in Java.
+import java.util.HashMap;
+class Practice {
+    public static void main(String[] args) {
+       String str = "geeksforgeeks";
+
+        HashMap<Character,Integer> table = new HashMap<>();
+
+        for(int i = 0; i < str.length();i++){
+            Character ch = str.charAt(i);
+            if(ch != ' '){
+                if(table.containsKey(ch)){
+                    int count = table.get(ch);
+                    table.put(ch,count + 1);
+                }else {
+                    table.put(ch,1);
+                }
+            }
+        }
+
+        System.out.println("Given String " + str);
+
+        for(int i = 0; i < str.length(); i++){
+            if(str.charAt(i) != ' ' && table.get(str.charAt(i)) != -1){
+                System.out.println(str.charAt(i) + " - " + table.get(str.charAt(i)));
+                table.put(str.charAt(i),-1);
+            }
+        }
+    }
+
+}
+
+
+
+3.//Find first non-repeating character of given String
+class Practice{
+    static final int NO_OF_CHARS = 256;
+    static char count[] = new char[NO_OF_CHARS];
+
+    static void getCharCountArray(String str){
+        for(int i = 0; i < str.length(); i++){
+            count[str.charAt(i)]++;
+        }
+
+    }
+    static int firstNonRepeating(String str){
+        getCharCountArray(str);
+        int index = -1;
+        for(int i = 0; i < str.length(); i++){
+            if(count[str.charAt(i)] == 1){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public static void main(String[] args) {
+        String str = "geeksforgeeks";
+        int index = firstNonRepeating(str);
+        System.out.println(str.charAt(index));
+    }
+}
+
+
+
+4.//Find Intersection of two unsorted arrays.
+import java.util.Arrays;
+
+class Practice{
+    public static void main(String[] args) {
+        int[] arr1 = {7, 1, 5, 2, 3, 6};
+        int[] arr2 = {3, 8, 6, 20, 7};
+        intersection(arr1,arr2);
+    }
+    public static void intersection(int[] arr1, int[] arr2){
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        int i = 0;
+        int j = 0;
+        while (i < arr1.length && j < arr2.length){
+            if(arr1[i] < arr2[j]){
+                i += 1;
+            }else if (arr1[i] > arr2[j]){
+                j += 1;
+            }else {
+                System.out.print(arr2[j]);
+                j += 1;
+                i += 1;
+            }
+        }
+    }
+}
+
+
+
+5.//Find missing elements of a range.
+import java.util.HashSet;
+
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 4};
+        missing(arr,1,10);
+
+    }
+    public static void missing(int[] arr, int low, int high){
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i = 0; i < arr.length; i++){
+            set.add(arr[i]);
+        }
+
+        for(int i = low; i <= high; i++){
+            if(!set.contains(i)){
+                System.out.print(i + " ");
+            }
+        }
+
+    }
+}
