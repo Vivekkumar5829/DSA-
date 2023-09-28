@@ -1,0 +1,156 @@
+1.//Check if pair with given Sum exists in Array (Two Sum).
+import java.util.HashSet;
+
+class Practice{
+    public static void main(String[] args) {
+
+        int[] arr = {0,-1,2,-3,1};
+        int x = -2;
+        findPairs(arr,x);
+
+    }
+    public static void findPairs(int[] arr, int sum) {
+
+        HashSet<Integer> set = new HashSet<Integer>();
+        for(int i = 0; i < arr.length; ++i){
+            int temp = sum - arr[i];
+            if(set.contains(temp)){
+                System.out.println("Yes");
+                return;
+            }
+            set.add(arr[i]);
+        }
+        System.out.println("No");
+
+    }
+}
+
+
+2.//Count Distinct ( Unique ) elements in an array.
+import java.util.HashSet;
+
+class Practice{
+    public static void main(String[] args) {
+
+        int[] arr = {6, 10, 5, 4, 9, 120, 4, 6, 10};
+        System.out.println(countDistinct(arr));
+
+
+
+
+    }
+    public static int countDistinct(int[] arr) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i = 0; i < arr.length; i++){
+            set.add(arr[i]);
+        }
+        return set.size();
+
+    }
+}
+
+
+3.//Count number of Distinct Substring in a String.
+import java.util.HashSet;
+import java.util.Set;
+
+class Practice{
+    public static void main(String[] args) {
+
+        String str = "aaaa";
+        System.out.println(distinctSubString(str));
+
+
+
+
+    }
+    public static int distinctSubString(String str) {
+
+        Set<String> result = new HashSet<String>();
+
+        for(int i = 0; i <= str.length(); i++){
+            for(int j = i + 1; j <= str.length(); j++){
+                result.add(str.substring(i,j));
+            }
+        }
+        return result.size();
+
+
+
+    }
+}
+
+4.//Print all unique words of a String.
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Practice {
+    public static void main(String[] args) {
+
+        String str = "Java is great. Grails is also great";
+        printUniqueWords(str);
+
+    }
+
+    public static void printUniqueWords(String str) {
+
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(str);
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        while (m.find()) {
+            String word = m.group();
+
+            if (!map.containsKey(word)) {
+                map.put(word, 1);
+            } else {
+                map.put(word, map.get(word) + 1);
+            }
+        }
+
+        Set<String> s = map.keySet();
+        Iterator<String> itr = s.iterator();
+
+        while (itr.hasNext()) {
+            String w = itr.next();
+
+            if (map.get(w) == 1)
+                System.out.println(w);
+        }
+    }
+
+
+}
+
+
+5.//Count all distinct pairs with difference equal to k.
+import java.util.*;
+import java.io.*;
+
+class Practice {
+    public static void main(String args[]) {
+        int arr[] = {1, 5, 3, 4, 2};
+        int n = arr.length;
+        int k = 3;
+        System.out.println("Count of pairs with given diff is "
+                + countPairsWithDiffK(arr, n, k));
+    }
+
+    static int countPairsWithDiffK(int arr[],
+                                   int n, int k) {
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++)
+                if (arr[i] - arr[j] == k ||
+                        arr[j] - arr[i] == k)
+                    count++;
+        }
+        return count;
+    }
+}
