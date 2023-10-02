@@ -1,0 +1,105 @@
+1.//Length of longest subarray with increasing contiguous elements.
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 4, 2, 3, 4,
+                2, 3, 5, 6, 7};
+
+        System.out.println(longestConsecutiveSubArray(arr));
+    }
+
+    public static  int longestConsecutiveSubArray(int[] arr){
+        int max = 0;
+        for(int i = 0; i < arr.length - 1; i++){
+        int count = 1;
+            int j;
+            for(j = i; j < arr.length - 1; j++){
+                if(arr[j + 1] == arr[j] + 1){
+                    count++;
+                }else {
+                    break;
+                }
+            }
+            max = Math.max(max,count);
+            i = j;
+
+        }
+        return max;
+    }
+}
+
+
+
+2.//Monotonic Array.
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 3, 7};
+      System.out.println(monotonic(arr));
+    }
+
+    public static boolean monotonic(int[] arr) {
+        boolean increasing = true;
+        boolean decresing = true;
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) increasing = false;
+            if (arr[i] < arr[i + 1]) decresing = false;
+
+
+        }
+        return increasing || decresing;
+    }
+}
+
+
+3.// Power of Two.
+class Practice {
+    public static void main(String[] args) {
+        int n = 16;
+        System.out.println(isPowerOfTwo(n));
+    }
+    public  static boolean isPowerOfTwo(int n) {
+        if (n < 1) {
+            return false;
+        }
+        return (n & (n - 1)) == 0;
+    }
+}
+
+
+4.// Add Two Integers.
+class Practice{
+    public static void main(String[] args) {
+        int num1 = 56;
+        int num2 = 55;
+        System.out.println(addTwoIntegers(num1,num2));
+    }
+
+    public static int addTwoIntegers(int num1, int num2){
+        for(int i = -200; i <= 200; i++){
+            if(num1 + num2 == i){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+
+5.//Buy Two Chocolates.
+//Buy two Chocolate.
+import java.util.*;
+    class Practice {
+        public static void main(String[] args) {
+            int[] prices = {1,2,2};
+            int money = 3;
+            System.out.println(buyChoco(prices,money));
+        }
+        public static int buyChoco(int[] prices, int money) {
+            Arrays.sort(prices);
+            if(prices[0] + prices[1] > money){
+                return money;
+            }else{
+                return money - (prices[0] + prices[1]);
+            }
+        }
+     }
