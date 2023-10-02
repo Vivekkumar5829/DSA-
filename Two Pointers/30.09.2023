@@ -1,0 +1,170 @@
+1.//Largest number having both positive and negative values present in the array.
+import java.util.*;
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {3,2,-2,5,-3,-8,78,11,34,-9,78};
+        System.out.println(bothPosNeg(arr));
+    }
+
+    public static int bothPosNeg(int[] arr){
+
+        Arrays.sort(arr);
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right){
+            int sum = arr[left] + arr[right];
+            if(sum == 0){
+                int result = Math.max(arr[left], arr[right]);
+                return result;
+            } else if (sum < 0) {
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return -1;
+    }
+}
+
+
+2.//Segregate Prime and Non-Prime Numbers in an array.
+import java.util.*;
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {1, 8, 2, 3, 4, 5, 7, 20};
+        segregatePrimeNonPrime(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void  segregatePrimeNonPrime(int[] arr){
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right){
+            if(isPrime(arr[left])){
+                left++;
+            }else {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                right--;
+            }
+        }
+    }
+
+    public static boolean isPrime(int n){
+
+        if(n <= 1){
+            return false;
+        }
+        for(int i = 2; i <= n/2; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+
+
+    }
+}
+
+
+3.//Generate all the substrings using two pointers method.
+class Practice{
+    public static void main(String[] args) {
+       String str = "abcca";
+       printAllSubString(str);
+    }
+
+    public static void  printAllSubString(String str){
+       for(int i = 0; i <= str.length(); i++){
+           for(int j = i + 1; j <= str.length(); j++){
+               System.out.println(str.substring(i,j));
+           }
+       }
+   }
+ }
+
+
+4.//Minimize length of a string by removing suffixes and prefixes of same characters.
+
+class Practice{
+    public static void main(String[] args) {
+        String str = "aabcccabba";
+        System.out.println(minLength(str));
+    }
+
+    static int minLength(String str){
+        int left = 0;
+        int right = str.length() - 1;
+
+        while(left < right && str.charAt(left) == str.charAt(right)){
+            char d = str.charAt(left);
+
+            while (left <= right && str.charAt(left) == d){
+                left++;
+            }
+            while (left <= right && str.charAt(right) == d){
+                right--;
+            }
+        }
+        return right - left + 1;
+    }
+}
+
+
+5.//Check if two strings can be made equal by reversing a substring of one of the strings.
+import java.util.*;
+
+class Practice{
+
+static void checkString(String X, String Y)
+{
+
+ int L = -1;
+ int R = -1;
+ for (int i = 0; i < X.length(); ++i) {
+ 	if (X.charAt(i) != Y.charAt(i)) {
+
+
+            L = i;
+}
+    }for (int i = X.length() - 1; i > 0; --i) {
+        if (X.charAt(i) != Y.charAt(i)) {
+ 	R = i;
+ 	break;
+        }
+    }
+ 	X = X.substring(0, L) +
+      reverse(X.substring(L, R + 1)) +
+      X.substring(R + 1);
+ 	if (X.equals(Y)) {
+        System.out.print("Yes");
+    }else {
+        System.out.print("No");
+    }
+}
+static String reverse(String input) {
+    char[] a = input.toCharArray();
+    int l, r = a.length - 1;
+    for (l = 0; l < r; l++, r--) {
+        char temp = a[l];
+        a[l] = a[r];
+        a[r] = temp;
+    }
+    return String.valueOf(a);
+}
+
+public static void main(String[] args)
+{
+    String X = "adcbef", Y = "abcdef";
+
+    // Function Call
+    checkString(X, Y);
+}
+}
+
+
+
+
+
