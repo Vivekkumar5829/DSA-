@@ -1,0 +1,213 @@
+1.//Implementing Stack using Arrays.
+class Stack{
+    static final int Max = 1000;
+    int top;
+    int[] a = new int[Max];
+
+    boolean isEmpty(){
+        return (top  < 0);
+    }
+    Stack(){
+        top = -1;
+    }
+
+    boolean push(int x){
+        if(top >= (Max - 1)){
+            System.out.println("Stack Overflow");
+            return false;
+        }else{
+            a[++top] = x;
+//            System.out.println(x + "  has been pushed");
+            return true;
+        }
+    }
+
+    int pop(){
+        if(top < 0){
+            System.out.println("Stack UnderFlow");
+            return 0;
+        }else{
+            int x = a[top--];
+            return x;
+        }
+
+    }
+
+    int peek(){
+        if(top < 0){
+            System.out.println("Stack UnderFlow");
+            return 0;
+        }else{
+            int x = a[top];
+            return x;
+        }
+    }
+
+    void print(){
+        for(int i = top; i > -1; i--){
+            System.out.println(a[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        Stack s = new Stack();
+        s.push(5);
+        s.push(6);
+        s.pop();
+        s.peek();
+        s.push(7);
+        s.print();
+    }
+}
+
+
+
+2.//Implementing Stack using Linked List:
+public class StackAsLinkedList {
+    StackNode root;
+
+    static class StackNode {
+        int data;
+        StackNode next;
+
+        StackNode(int data) {
+            this.data = data;
+        }
+    }
+
+        public boolean isEmpty() {
+            if (root == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public void push(int data) {
+            StackNode newNode = new StackNode(data);
+            if (root == null) {
+                root = newNode;
+            } else {
+                StackNode temp = root;
+                root = newNode;
+                newNode.next = temp;
+            }
+            System.out.println(data + " pushed to stack");
+        }
+
+        public int pop() {
+            int popped = Integer.MAX_VALUE;
+            if (root == null) {
+                System.out.println("Stack UnderFlow");
+            } else {
+                popped = root.data;
+                root = root.next;
+            }
+            return popped;
+        }
+
+        public int peek() {
+            if (root == null) {
+                System.out.println("Stack is empty");
+                return Integer.MIN_VALUE;
+            } else {
+                return root.data;
+            }
+        }
+
+        public static void main(String[] args) {
+
+            StackAsLinkedList sll = new StackAsLinkedList();
+
+            sll.push(10);
+            sll.push(20);
+            sll.push(30);
+
+            System.out.println(sll.pop()
+                    + " popped from stack");
+
+            System.out.println("Top element is " + sll.peek());
+        }
+
+}
+
+
+3.//Implement a stack using singly linked list:
+import  static java.lang.System.exit;
+
+class Main {
+    public static void main(String[] args)
+    {
+        StackUsingLinkedList obj
+                = new StackUsingLinkedList();
+        // insert Stack value
+        obj.push(11);
+        obj.push(22);
+        obj.push(33);
+        obj.push(44);
+        obj.display();
+        System.out.printf("\nTop element is %d\n",
+                obj.peek());
+        obj.pop();
+        obj.pop();
+        obj.display();
+        System.out.printf("\nTop element is %d\n",
+                obj.peek());
+    }
+}
+class StackUsingLinkedList{
+    private class Node{
+        int data;
+        Node link;
+    }
+    Node top;
+    StackUsingLinkedList(){
+        this.top = null;
+    }
+    public void push(int x){
+        Node temp = new Node();
+        if(temp == null){
+            System.out.println("\nHeap Overflow");
+            return;
+        }
+        temp.data = x;
+        temp.link = top;
+        top = temp;
+    }
+    public boolean isEmpty(){
+        return top == null;
+    }
+    public int peek(){
+        if(isEmpty()){
+            return top.data;
+        }else {
+            System.out.println("Stack is empty");
+            return -1;
+        }
+    }
+    public void pop(){
+        if(top == null){
+            System.out.println("\nStack Underflow");
+            return;
+        }
+        top = (top).link;
+    }
+    public void display(){
+        if(top == null){
+            System.out.println("\nStack Underflow");
+            exit(1);
+        }else {
+            Node temp = top;
+            while ((temp != null)){
+                System.out.println(temp.data);
+                temp =temp.link;
+                if(temp != null){
+                    System.out.println(" -- >");
+                }
+            }
+        }
+
+    }
+
+}
+
