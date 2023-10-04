@@ -1,0 +1,239 @@
+1.//Convert Infix expression to Postfix expression.
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Practice{
+    public static void main(String[] args) {
+        String exp = "a+b*(c^d-e)^(f+g*h)-i";
+        System.out.println(infixToPostfix(exp));
+    }
+    static int pre(char ch){
+        switch(ch){
+            case  '+':
+            case '-':
+                return 1;
+
+            case '*':
+            case  '/':
+                return 2;
+
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+    static String infixToPostfix(String exp){
+        String result = new String("");
+
+        Deque<Character> stack = new ArrayDeque<Character>();
+
+        for(int i = 0; i < exp.length(); ++i){
+            char c = exp.charAt(i);
+            if(Character.isLetterOrDigit(c)){
+                result += c;
+            }else if(c == '('){
+                stack.push(c);
+            }else if(c == ')'){
+                while (!stack.isEmpty() && stack.peek() != '('){
+                    result += stack.peek();
+                    stack.pop();
+                }
+                stack.pop();
+            }
+            else{
+                while (!stack.isEmpty() && pre(c) <= pre(stack.peek())){
+                    result += stack.peek();
+                    stack.pop();
+                }
+                stack.push(c);
+            }
+
+        }
+        while (!stack.isEmpty()){
+            if(stack.peek() == '(')
+                return "Invalid Expression";
+            result += stack.peek();
+            stack.pop();
+        }
+        return result;
+
+    }
+}
+
+
+2.//Prefix to Infix Conversion.
+import java.util.Stack;
+
+class Practice{
+    public static void main(String[] args) {
+        String str = "*-A/BC-/AKL";
+        System.out.println("Infix : " + convert(str));
+    }
+    static boolean isOperator(char x){
+        switch (x){
+            case 'x':
+            case '-':
+            case '*':
+            case '/':
+            case '^':
+            case '%':
+                return true;
+        }
+        return false;
+    }
+
+    public static String convert(String str){
+
+        Stack<String> stack = new Stack<>();
+
+        for(int i = str.length() - 1; i >= 0; i--){
+            char ch = str.charAt(i);
+            if(isOperator(ch)){
+                String option1 = stack.pop();
+                String option2 = stack.pop();
+
+                String temp = "(" + option1 + ch + option2 + ")";
+                stack.push(temp);
+            }else {
+                stack.push(ch + " ");
+            }
+        }
+        return stack.pop();
+    }
+}
+
+
+
+3.//Prefix to Postfix Conversion.
+import java.util.Stack;
+
+class Practice{
+    public static void main(String[] args) {
+        String str = "*-A/BC-/AKL";
+        System.out.println("Postfix : " + prefixToPostfix(str));
+    }
+    static boolean isOperator(char x){
+        switch (x){
+            case 'x':
+            case '-':
+            case '*':
+            case '/':
+            case '^':
+            case '%':
+                return true;
+        }
+        return false;
+    }
+
+    public static String prefixToPostfix(String str){
+
+        Stack<String> stack = new Stack<>();
+
+        for(int i = str.length() - 1; i >= 0; i--){
+            char ch = str.charAt(i);
+            if(isOperator(ch)){
+                String option1 = stack.pop();
+                String option2 = stack.pop();
+
+                String temp =  option1 + option2 + ch ;
+                stack.push(temp);
+            }else {
+                stack.push(ch + " ");
+            }
+        }
+        return stack.peek();
+    }
+}
+
+
+4.//Postfix to Prefix Conversion.
+import java.util.*;
+
+class Practice {
+    public static void main(String args[])
+    {
+        String str = "ABC/-AK/L-*";
+
+        System.out.println("Prefix : "+ postToPre(str));
+    }
+    static boolean isOperator(char x)
+    {
+        switch (x) {
+            case '+':
+            case '-':
+            case '/':
+            case '*':
+                return true;
+        }
+        return false;
+    }
+    static String postToPre(String str)
+    {
+        Stack<String> stack = new Stack<String>();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (isOperator(ch)) {
+                String option1 = stack.pop();
+                String option2 = stack.pop();
+                String temp = ch + option2 + option1;
+                stack.push(temp);
+            } else {
+                stack.push(ch + "");
+            }
+        }
+        String ans = "";
+        for (String i : stack)
+            ans += i;
+        return ans;
+    }
+
+}
+O/P :-- *-A/BC-/AKL
+
+
+5.//Postfix to Infix Conversion.
+import java.util.*;
+
+class Practice {
+    public static void main(String args[])
+    {
+        String str = "ABC/-AK/L-*";
+        System.out.println("Prefix : "+ postToInfix(str));
+    }
+    static boolean isOperator(char x)
+    {
+        switch (x) {
+            case '+':
+            case '-':
+            case '/':
+            case '*':
+                return true;
+        }
+        return false;
+    }
+    static String postToInfix(String str)
+    {
+        Stack<String> stack = new Stack<String>();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (isOperator(ch)) {
+                String option1 = stack.pop();
+                String option2 = stack.pop();
+                stack.push("(" + option2 + ch +
+                        option1 + ")");
+            } else {
+                stack.push(ch + "");
+            }
+        }
+        String ans = "";
+        for (String i : stack)
+            ans += i;
+        return ans;
+    }
+
+}
+
+O/P :--- ((A-(B/C))*((A/K)-L))
+
+
+
