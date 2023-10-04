@@ -1,0 +1,285 @@
+1.//Convert Infix To Prefix Notation.
+import java.util.Stack;
+
+class Practice{
+    static boolean isalpha(char c){
+        if(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z'){
+            return true;
+        }
+        return false;
+    }
+    static boolean isdigit(char c){
+        if(c >= '0' && c <= '9'){
+            return true;
+        }
+        return false;
+    }
+    static  boolean isOperator(char c){
+        return (!isalpha(c) && !isdigit(c));
+        }
+
+    static int getPriority(char c){
+        if(c == '-' || c == '+')
+            return 1;
+        else if (c == '*' || c == '/')
+            return 2;
+        else if (c == '^')
+            return 3;
+
+        return 0;
+    }
+
+    static String reverse (char str[], int start, int end){
+        char temp;
+        while (start < end){
+            temp = str[start];
+            str[start] = str[end];
+            str[end] = temp;
+            start++;
+            end--;
+        }
+        return String.valueOf(str);
+    }
+
+    static String infixToPostfix(char[] infix1){
+        String infix = '(' + String.valueOf(infix1) + ')';
+        int l = infix.length();
+        Stack<Character> char_stack = new Stack<>();
+        String output = "";
+
+        for(int i = 0; i < l; i++){
+            if(isalpha(infix.charAt(i)) || isdigit(infix.charAt(i)))
+                output += infix.charAt(i);
+            else if(infix.charAt(i) == '(')
+                char_stack.add('(');
+            else if (infix.charAt(i) ==')'){
+                while (char_stack.peek() != '('){
+                    output += char_stack.peek();
+                    char_stack.pop();
+                }
+                char_stack.pop();
+            } else {
+                if (isOperator(char_stack.peek())) {
+                    while (
+                            (getPriority(infix.charAt(i))
+                                    < getPriority(char_stack.peek()))
+                                    || (getPriority(infix.charAt(i))
+                                    <= getPriority(
+                                    char_stack.peek())
+                                    && infix.charAt(i) == '^')) {
+                        output += char_stack.peek();
+                        char_stack.pop();
+                    }
+
+                    // Push current Operator on stack
+                    char_stack.add(infix.charAt(i));
+                }
+            }
+        }
+        while (!char_stack.empty()){
+            output += char_stack.pop();
+
+        }
+        return output;
+    }
+    static String infixToPrefix(char[] infix){
+        int l = infix.length;
+        String infix1 = reverse(infix, 0 , l - 1);
+        infix = infix1.toCharArray();
+
+        for(int i = 0; i < l; i++){
+            if(infix[i] == '('){
+                infix[i] = ')';
+                i++;
+            } else if (infix[i] == ')') {
+                infix[i] = '(';
+                i++;
+            }
+        }
+        String prefix = infixToPostfix(infix);
+        prefix = reverse(prefix.toCharArray(), 0, l - 1);
+        return prefix;
+    }
+
+    public static void main(String[] args) {
+        String s = ("x+y*z/w+u");
+        System.out.println(infixToPostfix(s.toCharArray()));
+    }
+}
+O/P :== ++x/*yzwu
+
+
+2.//Check for Balanced Brackets in an expression (well-formedness).
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Practice{
+    public static void main(String[] args) {
+        String expr = "([{}])";
+        if(balanced(expr)){
+            System.out.println("Balanced");
+        }else {
+            System.out.println("Not Balance");
+        }
+    }
+    static boolean balanced(String exp){
+        Deque<Character> stack = new ArrayDeque<Character>();
+        for(int i = 0; i < exp.length(); i++){
+            char x = exp.charAt(i);
+            if(x == '(' || x == '[' || x == '{'){
+                stack.push(x);
+                continue;
+            }
+            if (stack.isEmpty()){
+                return false;
+            }
+            char check;
+            switch (x){
+                case ')':
+                    check = stack.pop();
+                    if(check == '{' || check == '[')
+                        return false;
+                    break;
+                case '}':
+                    check = stack.pop();
+                    if(check == '(' || check == '[')
+                        return false;
+                    break;
+                case ']':
+                    check = stack.pop();
+                    if(check == '(' || check == '{')
+                        return false;
+                    break;
+
+            }
+        }
+        return (stack.isEmpty());
+    }
+}
+
+
+3.//Evaluation of Postfix Expression.
+import java.util.Stack;
+
+class Practice{
+    public static void main(String[] args) {
+        String exp = "100 200 + 2 / 5 * 7 +";
+        System.out.println(evaluatePostfix(exp));
+    }
+    static int evaluatePostfix(String exp){
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i < exp.length(); i++){
+            char ch = exp.charAt(i);
+            if(ch == ' '){
+                continue;
+            }
+            else if(Character.isDigit(ch)){
+                int n = 0;
+                while (Character.isDigit(ch)){
+                    n = n * 10 + (int) (ch - '0');
+                    i++;
+                    ch = exp.charAt(i);
+                }
+                i--;
+                stack.push(n);
+
+            }
+            else {
+                int val1 = stack.pop();
+                int val2 = stack.pop();
+
+                switch (ch){
+                    case '+':
+                        stack.push(val2 + val1);
+                        break;
+                    case '-':
+                        stack.push(val2 - val1);
+                        break;
+                    case '*':
+                        stack.push(val2 * val1);
+                        break;
+                    case '/':
+                        stack.push(val2 / val1);
+                        break;
+                }
+            }
+        }
+        return stack.pop();
+    }
+}
+O/P :-- 757
+
+
+4.//How to Reverse a Stack using Recursion.
+import java.util.Stack;
+class Practice {
+    static Stack<Character> st = new Stack<>();
+
+    static void insert_at_bottom(char x) {
+        if (st.isEmpty()) {
+            st.push(x);
+        } else {
+            char a = st.peek();
+            st.pop();
+            insert_at_bottom(x);
+            st.push(a);
+        }
+    }
+
+    static void reverse() {
+        if (st.size() > 0) {
+            char x = st.peek();
+            st.pop();
+            reverse();
+
+            insert_at_bottom(x);
+        }
+    }
+
+    public static void main(String[] args) {
+        st.push('1');
+        st.push('2');
+        st.push('3');
+        st.push('4');
+
+        System.out.println("Original Stack");
+        System.out.println(st);
+        reverse();
+        System.out.println("Reversed Stack");
+        System.out.println(st);
+    }
+}
+O/P:-- Original Stack
+[1, 2, 3, 4]
+Reversed Stack
+[4, 3, 2, 1]
+
+
+5//Reverse individual words.
+import java.util.*;
+
+class Practice {
+static void reverseWords(String str)
+    {
+        Stack<Character> st = new Stack<Character>();
+        for (int i = 0; i < str.length(); ++i) {
+            if (str.charAt(i) != ' ')
+                st.push(str.charAt(i));
+            else {
+                while (st.empty() == false) {
+                    System.out.print(st.pop());
+                }
+                System.out.print(" ");
+            }
+        }
+        while (st.empty() == false) {
+            System.out.print(st.pop());
+        }
+    }
+    public static void main(String[] args)
+    {
+        String str = "Programming";
+        reverseWords(str);
+    }
+}
+O/P :--gnimmargorP
