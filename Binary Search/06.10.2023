@@ -1,0 +1,141 @@
+1.//Guess Number Higher or Lower.
+class Practice{
+    public static void main(String[] args) {
+        int n = 36;
+        System.out.println(guessGame(n));
+    }
+
+    public static int guessGame(int n){
+        int start = 1;
+        int end = n;
+        int mid = 0;
+        while (start < end){
+            mid = start + (end - start)/2;
+            int r = guess(mid);
+            if(r == 0){
+                return mid;
+            }else if (mid == -1){
+                end = mid - 1;
+            }else {
+                start = mid + 1;
+            }
+        }
+        return -1;
+
+    }
+}
+
+
+
+2.//Arranging coins.
+class Practice{
+    public static void main(String[] args) {
+        int n = 8;
+        System.out.println(arrangingCoins(n));
+    }
+
+    public static int arrangingCoins(int n){
+        long start = 1;
+        long end = n;
+        long result = 0;
+
+        while (start <= end){
+            long mid = start + (end - start)/2;
+            long sum = ((mid) * (mid + 1))/2;
+            if(sum > n){
+                end = mid - 1;
+            }else {
+                start = mid + 1;
+                result = Math.max(result, mid);
+            }
+        }
+        return (int)result;
+
+    }
+}
+
+
+
+3.//Binary Search.
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {3,5,6,7,8,9,11,14,16,19};
+        int n = 9;
+        System.out.println(binarySearch(arr, n));
+    }
+
+    public static int binarySearch(int[] arr, int n){
+        int start = 1;
+        int end = arr.length - 1;
+
+
+        while (start <= end){
+            int mid = start + (end - start)/2;
+            if(arr[mid] == n){
+                return mid;
+            }
+            else if(arr[mid] > n){
+                end = mid - 1;
+            }else {
+                start = mid + 1;
+            }
+        }
+        return -1;
+
+    }
+}
+
+
+4.//Find smallest letter greater than target.
+class Practice{
+    public static void main(String[] args) {
+        char[] letters = {'d', 'h', 'l'};
+        char target = 'a';
+        System.out.println(findNextLetter(letters,target));
+    }
+
+    public static char findNextLetter(char[] letter, char target){
+
+        int start = 0;
+        int end = letter.length - 1;
+        char nextLetter = letter[start];
+        while (start <= end){
+            int mid = start + (end - start)/2;
+            if(letter[mid] > target){
+                end = mid - 1;
+                nextLetter = letter[mid];
+            }else {
+                start = mid + 1;
+            }
+        }
+        return nextLetter;
+
+    }
+}
+
+
+
+5.//Peak index in a mountain array.
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {0,10,5,2};
+
+        System.out.println(peakIndexInMountainArray(arr));
+    }
+
+    public static int peakIndexInMountainArray(int[] arr) {
+        int low = 0;
+        int high = arr.length - 1;
+        int mid;
+        while (low<high) {
+            mid = low + (high - low) / 2;
+            if (arr[mid] >= arr[mid + 1]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+
+}
