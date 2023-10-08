@@ -1,0 +1,102 @@
+1.//Maximum Average Subarray I.
+class Practice{
+    public static void main(String[] args) {
+        int arr[] = {1, 12, -5, -6, 50, 3};
+        int k = 4;
+        System.out.println(maximumAverageSubarray(arr,k));
+    }
+
+    public static double maximumAverageSubarray(int[] arr, int k ){
+        int sum = 0;
+        for(int i = 0; i < k; i++)
+            sum += arr[i];
+        int maxSum = sum;
+
+        int startIndex = 0;
+        int endIndex = k;
+
+        while (endIndex < arr.length){
+            sum -= arr[startIndex];
+            startIndex++;
+            sum += arr[endIndex];
+            endIndex++;
+            maxSum = Math.max(maxSum, sum);
+        }
+        return (double) maxSum/k;
+    }
+}
+
+
+2.//Count Occurrences of Anagrams.
+import java.util.Arrays;
+
+class Practice{
+    public static void main(String[] args) {
+        String text = "forxxorfxdofr";
+        String word = "for";
+        System.out.println(countAnagrams(text,word));
+    }
+
+    static boolean arrAnagram(String subArray, String word){
+        char[] ch1 = subArray.toCharArray();
+        char[] ch2 = word.toCharArray();
+        Arrays.sort(ch1);
+        Arrays.sort(ch2);
+
+        if(Arrays.equals(ch1,ch2))
+            return true;
+        else
+            return false;
+    }
+
+    static int countAnagrams(String text, String word){
+        int N = text.length();
+        int n = word.length();
+        int count = 0;
+        for(int i = 0; i <= N - n; i++){
+            String subStr = text.substring(i , i + n);
+            if(arrAnagram(word,subStr))
+                count++;
+        }
+        return count;
+
+    }
+}
+
+
+3.//Find Subarray with given sum .
+public class Practice {
+
+    public static void main(String[] args)
+    {
+        int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 };
+        int n = arr.length;
+        int k = 23;
+        System.out.println(subArraySum(arr,n,k));
+    }
+     static int subArraySum(int arr[], int n, int k)
+    {
+        int sum = arr[0];
+        int start = 0, i;
+
+        for (i = 1; i <= n; i++) {
+            while (sum > k && start < i - 1) {
+                sum = sum - arr[start];
+                start++;
+            }
+            if (sum == k) {
+                int p = i - 1;
+                System.out.println(start + " " +  p);
+                return 1;
+            }
+            if (i < n)
+                sum = sum + arr[i];
+        }
+        return  - 1;
+    }
+
+
+}
+
+
+4.
