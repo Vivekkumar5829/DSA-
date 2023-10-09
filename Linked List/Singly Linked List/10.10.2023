@@ -1,0 +1,309 @@
+1.//Find Length of a Linked List.
+public class SinglyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public SinglyLinkedList() {
+        this.size = 0;
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public void push(int value) {
+        Node node = new Node(value);
+        node.next = head;
+        head = node;
+        if (tail == null) {
+            tail = head;
+        }
+        size++;
+    }
+
+    public int getlength() {
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            temp = temp.next;
+            count++;
+        }
+        return count;
+    }
+    public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.push(3);
+        list.push(4);
+        list.push(5);
+        list.push(6);
+        list.push(6);
+        list.push(9);
+        System.out.println(list.getlength());
+
+    }
+}
+
+
+2.//Detect loop or cycle in a linked list.
+import java.util.HashSet;
+public class SinglyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public SinglyLinkedList() {
+        this.size = 0;
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public void push(int value) {
+        Node node = new Node(value);
+        node.next = head;
+        head = node;
+        if (tail == null) {
+            tail = head;
+        }
+        size++;
+    }
+
+    public boolean detectLoop(Node temp) {
+        HashSet<Node> set = new HashSet<Node>();
+        while(temp != null){
+            if(set.contains(temp))
+                return true;
+            set.add(temp);
+            temp = temp.next;
+
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.push(3);
+        list.push(4);
+        list.push(5);
+        list.push(6);
+        list.push(6);
+        list.push(9);
+        System.out.println(list.detectLoop(list.head));
+        list.head.next.next.next.next = list.head;
+        System.out.println(list.detectLoop(list.head));
+
+    }
+}
+
+
+3.//Find length of loop/cycle in given Linked List.
+public class SinglyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public SinglyLinkedList() {
+        this.size = 0;
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public void push(int value) {
+        Node node = new Node(value);
+        node.next = head;
+        head = node;
+        if (tail == null) {
+            tail = head;
+        }
+        size++;
+    }
+
+    public int countNodeInLoop(Node temp) {
+// Floyd's Cycle Detection Algorithm.
+       Node slow = temp;
+       Node fast = temp;
+       while (slow != null && fast != null && fast.next != null){
+           slow = slow.next;
+           fast = fast.next.next;
+
+           if(slow == fast)
+               return count(slow);
+        }
+        return -1;
+    }
+    public int count(Node n){
+        int count = 0;
+        Node temp = n;
+        while (temp.next != n){
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+    public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.push(3);
+        list.push(4);
+        list.push(5);
+        list.push(6);
+        list.push(6);
+        list.push(9);
+        System.out.println(list.countNodeInLoop(list.head));
+        list.head.next.next.next.next = list.head;
+        System.out.println(list.countNodeInLoop(list.head));
+
+    }
+}
+
+
+4.//Function to check if a singly linked list is palindrome.
+import java.util.Stack;
+public class SinglyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public SinglyLinkedList() {
+        this.size = 0;
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public void push(int value) {
+        Node node = new Node(value);
+        node.next = head;
+        head = node;
+        if (tail == null) {
+            tail = head;
+        }
+        size++;
+    }
+    public boolean isPalindrome(Node n){
+        Stack<Integer> stack = new Stack<Integer>();
+        Node temp = n;
+        while (temp != null){
+            stack.push(temp.value);
+            temp = temp.next;
+        }
+        Node temp2 = n;
+        while (temp2 != null){
+            if(stack.pop() != temp2.value)
+                return false;
+            temp2 = temp2.next;
+        }
+        return true;
+    }
+	 public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.push(2);
+        list.push(1);
+        System.out.println(list.isPalindrome(list.head));
+
+
+    }
+}
+
+
+5.//Remove duplicates from a sorted linked list.
+class LinkedList {
+    Node head;
+    class Node {
+        int data;
+        Node next;
+        Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+    }
+
+    void removeDuplicates()
+    {
+        Node curr = head;
+        while (curr != null) {
+            Node temp = curr;
+            while (temp != null && temp.data == curr.data) {
+                temp = temp.next;
+            }
+            curr.next = temp;
+            curr = curr.next;
+        }
+    }
+    public void push(int new_data)
+    {
+        Node new_node = new Node(new_data);
+        new_node.next = head;
+        head = new_node;
+    }
+    void printList()
+    {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+    public static void main(String args[])
+    {
+        LinkedList llist = new LinkedList();
+        llist.push(20);
+        llist.push(13);
+        llist.push(13);
+        llist.push(11);
+        llist.push(11);
+        llist.push(11);
+        llist.printList();
+        llist.removeDuplicates();
+        llist.printList();
+    }
+}
+
