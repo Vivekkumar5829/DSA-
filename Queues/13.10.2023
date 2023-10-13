@@ -1,0 +1,83 @@
+class QNode {
+    int key;
+    QNode next;
+
+    QNode(int key) {
+        this.key = key;
+        this.next = null;
+    }
+}
+    class Queue{
+        QNode front,rear;
+        Queue(){
+            this.front = this.rear = null;
+    }
+
+    boolean isEmpty(Queue queue){
+            return (this.front== null && this.rear == null);
+    }
+    
+    void enqueue(int key){
+            QNode temp = new QNode(key);
+            if(isEmpty(this)){
+                this.front = this.rear = temp;
+//                System.out.println(temp.key + " is pushed in");
+            }else{
+                this.rear.next = temp;
+                this.rear = temp;
+//                System.out.println(temp.key + " is pushed in");
+            }
+    }
+    
+    void dequeue(){
+            if(isEmpty(this)){
+                System.out.println("Queue is empty");
+                return;
+            }else{
+                QNode temp = this.front;
+                this.front = this.front.next;
+//                System.out.println(temp.key + " is pushed out");
+            }
+            if(this.front == null){
+                this.rear = null;
+            }
+    }
+    
+    int front(){
+            if(isEmpty(this)){
+                System.out.println("Queue is empty");
+                return Integer.MIN_VALUE;
+            }else{
+                return this.front.key;
+            }
+    }
+    
+    int rear(){
+            if(isEmpty(this)){
+                System.out.println("Queue is empty");
+                return Integer.MIN_VALUE;
+            }else{
+                return this.rear.key;
+            }
+    }
+    
+    void display(){
+            QNode temp = front;
+            while (temp != null){
+                System.out.print(temp.key  + "-->");
+                temp = temp.next;
+            }
+    }
+    
+        public static void main(String[] args) {
+            Queue queue = new Queue();
+            queue.enqueue(7);
+            queue.enqueue(8);
+            queue.enqueue(9);
+            queue.display();
+            System.out.println();
+            System.out.println(queue.front());
+            System.out.println(queue.rear());
+           
+        }
+}
