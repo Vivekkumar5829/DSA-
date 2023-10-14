@@ -1,3 +1,4 @@
+//Implementong Queue using Linked List.
 class QNode {
     int key;
     QNode next;
