@@ -1,0 +1,74 @@
+//Implementing Circular Queue using ArrayList.
+import java.util.ArrayList;
+
+class CircularQueue{
+    private int size;
+    private int front;
+    private int rear;
+    ArrayList<Integer> queue = new ArrayList<Integer>();
+    CircularQueue(int size){
+        this.size = size;
+        this.rear = this.front = -1;
+    }
+
+    public void enqueue(int data){
+        if((front == 0 && rear == size - 1) || (front == (rear + 1) % size)){
+            System.out.println("Queue is full");
+        }else if (front == -1){
+            front = 0;
+            rear = 0;
+            queue.add(rear,data);
+        }else if(rear == size - 1 && front != 0){
+            rear = 0;
+            queue.set(rear, data);
+        }else{
+            rear = (rear + 1);
+            if(front <= rear){
+                queue.add(rear, data);
+            }else {
+                queue.set(rear,data);
+            }
+        }
+    }
+
+    public int dequeue(){
+        int temp;
+        if(front == -1){
+            System.out.println("Queue is empty");
+            return -1;
+        }
+        temp = queue.get(front);
+        if(front == rear){
+            front = -1;
+            rear = -1;
+        }
+        else if(front == size -1){
+            front = 0;
+        }else{
+            front = front + 1;
+        }
+        return temp;
+    }
+    public void display(){
+
+        if(rear >= front)
+        {
+            for(int i = front; i <= rear; i++)
+            {
+                System.out.print(queue.get(i) + "-->");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        CircularQueue queue1 = new CircularQueue(6);
+        queue1.enqueue(1);
+        queue1.enqueue(2);
+        queue1.enqueue(3);
+        queue1.enqueue(4);
+        queue1.enqueue(5);
+        queue1.enqueue(6);
+        queue1.display();
+    }
+}
