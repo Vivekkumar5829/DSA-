@@ -1,3 +1,4 @@
+//Implementing Queue using Arrays.
 class Queue{
     int front;
     int rear;
