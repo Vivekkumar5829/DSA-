@@ -1,0 +1,72 @@
+A. //Monotonic Increasing Stack.
+import java.util.*;
+class PRactice {
+    static void increasingStack(int[] arr, int N)
+    {
+        Stack<Integer> stk = new Stack<>();
+        for (int i = 0; i < N; i++) {
+            while (stk.size() > 0 && stk.peek() > arr[i]) {
+                stk.pop();
+            }
+            stk.push(arr[i]);
+        }
+
+        int N2 = stk.size();
+        int[] ans = new int[N2];
+        Arrays.fill(ans, 0);
+        int j = N2 - 1;
+
+        // Empty Stack
+        while (!stk.isEmpty()) {
+            ans[j] = stk.peek();
+            stk.pop();
+            j--;
+        }
+        System.out.print("The Stack: ");
+        System.out.println(Arrays.toString(ans));
+    }
+
+    public static void main(String[] args)
+    {
+        int[] arr = { 15, 17, 12, 13, 14 ,10  };
+        int N = arr.length;
+        increasingStack(arr, N);
+    }
+}
+
+
+B. //Monotonic Decreasing Stack.
+import java.util.*;
+class PRactice {
+    static void increasingStack(int[] arr, int N)
+    {
+        Stack<Integer> stk = new Stack<>();
+        for (int i = 0; i < N; i++) {
+            while (stk.size() > 0 && stk.peek() < arr[i]) {
+                stk.pop();
+            }
+            stk.push(arr[i]);
+        }
+
+        int N2 = stk.size();
+        int[] ans = new int[N2];
+        Arrays.fill(ans, 0);
+        int j = N2 - 1;
+
+        // Empty Stack
+        while (!stk.isEmpty()) {
+            ans[j] = stk.peek();
+            stk.pop();
+            j--;
+        }
+        System.out.print("The Stack: ");
+        System.out.println(Arrays.toString(ans));
+    }
+
+    public static void main(String[] args)
+    {
+        int[] arr = { 15, 17, 12, 13, 14 ,10  };
+        int N = arr.length;
+        increasingStack(arr, N);
+    }
+}
