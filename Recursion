@@ -33,3 +33,37 @@ class SumOfTriangle{
         System.out.println(Arrays.toString(arr));
     }
 }
+
+
+2.//Recursive Programs to find Minimum and Maximum elements of array.
+Input: arr = {1, 4, 3, -5, -4, 8, 6};
+Output: min = -5, max = 8
+
+Input: arr = {1, 4, 45, 6, 10, -8};
+Output: min = -8, max = 45
+
+class Practice {
+    public static void main(String[] args) {
+        int[] arr = {1, 4, 3, -5, -4, 8, 6};
+        System.out.println("Min = " + min_Element(arr, arr.length));
+        System.out.println("Max = " +maxElement(arr,arr.length));
+    }
+    public static int min_Element(int[] arr, int n){
+        if(n == 1)
+            return arr[0];
+
+        int min = min_Element(arr,n-1);
+        if(arr[n - 1] > min){
+            return min;
+        }else{
+            return arr[n - 1];
+        }
+    }
+
+    public static int maxElement(int[] arr, int n){
+        if(n == 1)
+            return arr[0];
+        return Math.max(arr[n - 1] , maxElement(arr, n-1));
+    }
+}
+
