@@ -67,3 +67,143 @@ class Practice {
     }
 }
 
+3. // Write a program to print from a given number N to 1.
+Input: N = 6;
+Output: 6,5,4,3,2,1
+class Practice{
+    public static void main(String[] args) {
+        int n = 6;
+        printNtoOne(n);
+    }
+    public static void printNtoOne(int n){
+        System.out.println(n);
+        if(n == 1){
+            System.out.println(n);
+            return;
+        }
+        printNtoOne(n-1);
+    }
+}
+
+4. //Write a program to print from a given number 1 to N.
+
+ public static void printOnetoN(int n){
+
+        if(n == 1){
+            System.out.println(n);
+            return;
+        }
+        printOnetoN(n-1);
+        System.out.println(n);
+    }
+
+5. //Write a program to find the factorial of given number.
+
+ public static int factorial(int n){
+        if(n <= 1)
+            return 1 ;
+
+        return n *  factorial(n-1);
+    }
+
+6. // Write a program to find the sum of N number.
+
+  public static int sum(int n){
+        if(n == 1){
+            return 1;
+        }
+        return n + sum(n - 1);
+    }
+
+7. // Write a program to find the sum of the digits in a given number.
+
+  public static int sumOfDigits(int n){
+        if(n == 0){
+            return 0;
+        }
+        return (n % 10) + sumOfDigits(n / 10);
+    }
+
+8. // Write a program to find the product of the digits in a given number.
+
+  public static int productOfDigits(int n){
+        if(n % 10 == n){
+            return n;
+        }
+        return (n % 10) * productOfDigits(n /10);
+    }
+
+9. // Write a program to reverse the given number.
+  public static int reverse(int n){
+        int sum = 0;
+        while (n > 0) {
+            int remainder = n % 10;
+            n = n / 10;
+            sum = sum * 10 + remainder;
+        }
+        return sum;
+    }
+
+10. // Write a program to check for the palindrome.
+
+ public static boolean palindrome(int n){
+        return reverse(n) == n;
+    }
+
+11. Write a program to count hte number of 0 in a given number.
+
+public static int countZero(int n){
+        return helper(n,0);
+    }
+
+    public static int helper(int n, int count){
+       if(n == 0){
+           return count;
+       }
+       int remainder = n % 10;
+       if(remainder == 0){
+         return helper(n / 10, count+ 1);
+       }
+       return helper(n / 10, count);
+    }
+
+12. //Leetcode(1342) Number of Steps to Reduce a Number to Zero.
+
+   public static int numberOfSteps(int n){
+        return helper1(n, 0);
+    }
+    public static int helper1(int n, int steps){
+        if(n == 0){
+            return steps;
+        }
+        if(n % 2 == 0){
+            return helper1(n / 2, steps + 1);
+        }
+        return helper1(n - 1, steps + 1);
+    }
+
+(Brute Force way):--
+    public static int numOfSteps(int n){
+        int steps = 0;
+        while (n > 0){
+            if(n % 2 == 0){
+                n = n / 2;
+            }else{
+                n = n - 1;
+            }
+            steps++;
+
+        }
+        return steps;
+    }
+}
+
+
+
+
+
+
+
+
+
+
