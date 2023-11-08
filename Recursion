@@ -198,6 +198,141 @@ public static int countZero(int n){
     }
 }
 
+13.// (leetcode)704 Binary Search
+
+ public static int search(int[] nums, int target) {
+        return  binarySearch(nums, target, 0, nums.length - 1);
+    }
+
+    public static int binarySearch(int[] nums, int target, int start, int end) {
+        if(start > end){
+            return -1;
+        }
+        int mid = start + (end - start)/2;
+        if(nums[mid] == target){
+            return mid;
+        }else if(nums[mid] > target){
+            return binarySearch(nums,target,start,mid-1);
+        }else{
+            return binarySearch(nums,target,mid+1, end);
+        }
+
+    }
+
+14. //First uppercase letter in a string (Iterative and Recursive).
+
+ public static char capital(String str){
+        for(int i = 0; i < str.length(); i++){
+            if(Character.isUpperCase(str.charAt(i))){
+                return str.charAt(i);
+            }
+        }
+        return 0;
+    } 
+  			OR
+    public static char capital1(String str1, int i){
+        if(str1.charAt(i) == '\0'){
+            return 0;
+        }
+        if(Character.isUpperCase(str1.charAt(i))){
+            return str1.charAt(i);
+        }
+        return capital1(str1,i - 1);
+    }
+
+15. // Print all the occurrences of the target in the given array.
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5,8,9,10,18,19,19,19,22};
+        System.out.println(allOccurrences(arr,19,0,new ArrayList<>()));
+    }
+
+   public static ArrayList<Integer> allOccurrences(int[] arr,int target, int i, ArrayList<Integer> list){
+        if(i == arr.length - 1){
+            return list;
+        }
+        if(arr[i] == target){
+            list.add(i);
+        }
+       return allOccurrences(arr,target, i+ 1, list);
+    }
+}
+
+                           OR
+class Practice{
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5,8,9,10,18,19,19,19,22};
+
+        allOccurrences(arr,19,0);
+        System.out.println(list);
+}
+static ArrayList<Integer> list = new ArrayList<>();
+    public static void allOccurrences(int[] arr,int target, int i){
+        if(i == arr.length - 1){
+            return;
+        }
+        if(arr[i] == target){
+            list.add(i);
+        }
+       allOccurrences(arr,target, i+ 1);
+    }
+}
+
+16. // Print all the occurrences of the target in the given array one condition you have to take ArrayList inside the function.
+
+ public static ArrayList<Integer> allOccurrences2(int[] arr, int target, int i){
+        ArrayList<Integer> list = new ArrayList<>();
+        if(i == arr.length - 1){
+            return list;
+        }
+        if(arr[i] == target){
+            list.add(i);
+        }
+        ArrayList<Integer> ansCombined = allOccurrences2(arr,target,i + 1);
+        list.addAll(ansCombined);
+        return list;
+
+    }
+
+17. //Linear Search using recursion.
+
+    public static int linearSearch(int[] arr, int target, int i){
+      if(i == arr.length){
+          return -1;
+      }
+      if(arr[i] == target){
+          return i;
+      }
+      return linearSearch(arr,target, i + 1);
+    } 
+                               OR
+
+    public static int linearSearchlast(int[] arr, int target, int i){
+        if(i == -1){
+            return -1;
+        }
+        if(arr[i] == target){
+            return i;
+        }else {
+            return linearSearchlast(arr,target,i - 1);
+        }
+
+//        return arr[i] == target || linearSearchlast(arr,target,i-1);   it will return boolean value.
+    }
+
+18. // Check if the given array is sorted or not.
+
+    public static boolean sorted(int[] arr, int i){
+       if(i == arr.length - 1){
+           return true;
+       }
+       return arr[i] < arr[i + 1] && sorted(arr, i + 1);
+//       if(arr[i] > arr[i + 1]){
+//           return false;
+//       }
+//       return sorted(arr,i+1);
+    }
+
 
 
 
