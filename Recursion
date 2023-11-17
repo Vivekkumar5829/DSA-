@@ -86,8 +86,7 @@ class Practice{
 }
 
 4. //Write a program to print from a given number 1 to N.
-
- public static void printOnetoN(int n){
+public static void printOnetoN(int n){
 
         if(n == 1){
             System.out.println(n);
@@ -98,8 +97,7 @@ class Practice{
     }
 
 5. //Write a program to find the factorial of given number.
-
- public static int factorial(int n){
+public static int factorial(int n){
         if(n <= 1)
             return 1 ;
 
@@ -107,8 +105,7 @@ class Practice{
     }
 
 6. // Write a program to find the sum of N number.
-
-  public static int sum(int n){
+ public static int sum(int n){
         if(n == 1){
             return 1;
         }
@@ -116,8 +113,7 @@ class Practice{
     }
 
 7. // Write a program to find the sum of the digits in a given number.
-
-  public static int sumOfDigits(int n){
+public static int sumOfDigits(int n){
         if(n == 0){
             return 0;
         }
@@ -125,8 +121,7 @@ class Practice{
     }
 
 8. // Write a program to find the product of the digits in a given number.
-
-  public static int productOfDigits(int n){
+ public static int productOfDigits(int n){
         if(n % 10 == n){
             return n;
         }
@@ -145,13 +140,11 @@ class Practice{
     }
 
 10. // Write a program to check for the palindrome.
-
  public static boolean palindrome(int n){
         return reverse(n) == n;
     }
 
 11. Write a program to count hte number of 0 in a given number.
-
 public static int countZero(int n){
         return helper(n,0);
     }
@@ -168,8 +161,7 @@ public static int countZero(int n){
     }
 
 12. //Leetcode(1342) Number of Steps to Reduce a Number to Zero.
-
-   public static int numberOfSteps(int n){
+ public static int numberOfSteps(int n){
         return helper1(n, 0);
     }
     public static int helper1(int n, int steps){
@@ -199,8 +191,7 @@ public static int countZero(int n){
 }
 
 13.// (leetcode)704 Binary Search
-
- public static int search(int[] nums, int target) {
+public static int search(int[] nums, int target) {
         return  binarySearch(nums, target, 0, nums.length - 1);
     }
 
@@ -220,8 +211,7 @@ public static int countZero(int n){
     }
 
 14. //First uppercase letter in a string (Iterative and Recursive).
-
- public static char capital(String str){
+public static char capital(String str){
         for(int i = 0; i < str.length(); i++){
             if(Character.isUpperCase(str.charAt(i))){
                 return str.charAt(i);
@@ -279,8 +269,7 @@ static ArrayList<Integer> list = new ArrayList<>();
 }
 
 16. // Print all the occurrences of the target in the given array one condition you have to take ArrayList inside the function.
-
- public static ArrayList<Integer> allOccurrences2(int[] arr, int target, int i){
+public static ArrayList<Integer> allOccurrences2(int[] arr, int target, int i){
         ArrayList<Integer> list = new ArrayList<>();
         if(i == arr.length - 1){
             return list;
@@ -295,8 +284,7 @@ static ArrayList<Integer> list = new ArrayList<>();
     }
 
 17. //Linear Search using recursion.
-
-    public static int linearSearch(int[] arr, int target, int i){
+ public static int linearSearch(int[] arr, int target, int i){
       if(i == arr.length){
           return -1;
       }
@@ -321,8 +309,7 @@ static ArrayList<Integer> list = new ArrayList<>();
     }
 
 18. // Check if the given array is sorted or not.
-
-    public static boolean sorted(int[] arr, int i){
+public static boolean sorted(int[] arr, int i){
        if(i == arr.length - 1){
            return true;
        }
@@ -333,12 +320,177 @@ static ArrayList<Integer> list = new ArrayList<>();
 //       return sorted(arr,i+1);
     }
 
+19. // Length of string using Recursion.
+public static int len(String str) {
+        if (str.equals("")) {
+            return 0;
+        } else {
+            return len(str.substring(1)) + 1;
+        }
+    }
 
+20. //Recursive Bubble Sort.
+ public static void bubbleSort(int[] arr,int r, int c){
+          if(r == 0){
+              return;
+          }
+          if(c < r){
+              if(arr[c] > arr[c + 1]){
+                  int temp = arr[c];
+                  arr[c] = arr[c + 1];
+                  arr[c + 1] = temp;
+              }
+              bubbleSort(arr,r,c + 1);
+          }else {
+              bubbleSort(arr,r - 1, 0);
+          }
+        }
 
+21. //Sum of digit of a number using Recursion.
+public static int sum(int n){
+        if(n == 0){
+            return 0;
+        }
+        return n % 10 + sum(n / 10);
+        }
 
+22. //Product of two numbers using Recursion.
+public static int product(int x, int y){
+        if(x < y){
+            return product(y,x);
+        }else if(y != 0){
+            return x + product(x,y - 1);
+        }else{
+            return 0;
+        }
+        }
 
+23. //Check Prime or not.
+public static boolean isPrime(int n, int i){
+        if(n <= 2){
+            return (n == 2);
+        }
+        if(n % i == 0){
+            return false;
+        }
+        if(i * i > n){
+            return true;
+        }
+        return isPrime(n, i + 1);
+        }
 
+24. //Sum of Natural numbers using Recursion.
+public static int sumNatural(int n){
+        if(n == 1){
+            return 1;
+        }
+        return n + sumNatural(n - 1);
+        }
 
+25. //Power of Two.
+public static boolean isPowerOfTwo(int n){
+        if(n == 0){
+            return false;
+        }
+        if(n == 1){
+            return true;
+        }
+        if(n % 2 != 0){
+            return false;
+        }else {
+            return isPowerOfTwo(n/2);
+        }
+        }
 
+26. // How many Power of Two.
+public static int isPowerOfTwo1(int n,int count){
+        if(n == 0){
+            return -1;
+        }
+        if(n == 1){
+            return count;
+        }
+        if(n % 2 != 0){
+            return -1;
+        }else {
+            return isPowerOfTwo1(n/2 , count + 1);
+        }
+    }
+
+27. //Power of Three.
+public static boolean isPowerOfThree(int n) {
+        if(n == 0){
+            return false;
+        }
+        if(n == 1){
+            return true;
+        }
+        if(n % 3 != 0){
+            return false;
+        }else {
+            return isPowerOfThree(n/3);
+        }
+    }
+
+28. //Power of Four.
+ public static boolean isPowerOfFour(int n) {
+        if(n == 0){
+            return false;
+        }
+        if(n == 1){
+            return true;
+        }
+        if(n % 4 != 0){
+            return false;
+        }else {
+            return isPowerOfFour(n/4);
+        }
+    }
+
+30. //Write a recursive function that returns the factorial of a number.
+public static int factorial(int n){
+        if(n == 1){
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+
+32. //Write a recursive function to check whether an array is sorted or not. 
+public static boolean isSorted(int[] arr, int index){
+        if(index == arr.length - 1){
+            return true;
+        }
+        if(arr[index] > arr[index + 1]){
+            return false;
+        }
+        return isSorted(arr,index + 1);
+    }
+
+33. //Number of Steps to Reduce a Number to Zero.
+public static int reduceToZero(int n, int steps){
+        if(n == 0){
+            return steps;
+        }
+        if(n % 2 == 0){
+           return reduceToZero(n / 2 , steps + 1);
+        }else {
+           return reduceToZero(n - 1, steps + 1);
+        }
+
+    }
+
+34. //Remove consecutive duplicate characters from a string. 
+ public static String consecutiveDuplicates(String p, String str){
+        if(str.length() <= 1){
+            p = p + str.charAt(0);
+            return p;
+        }
+        char ch = str.charAt(0);
+        if(str.charAt(0) == str.charAt(1)){
+            return consecutiveDuplicates(p,str.substring(1));
+        }else{
+            return consecutiveDuplicates(p + ch,str.substring(1));
+        }
+    }
 
 
