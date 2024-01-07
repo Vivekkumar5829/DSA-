@@ -29,4 +29,16 @@ public class BinarySearchTree {
  public boolean isEmpty(){
         return root == null;
     }
+
+ public void display(){
+        display(this.root, "Root Node: ");
+    }
+    public void display(Node node, String details){
+        if(node == null){
+            return;
+        }
+        System.out.println(details + node.value);
+        display(node.left, "Left child of " + node.value + " : ");
+        display(node.right, "Right child of " + node.value + " : ");
+    }
 }
