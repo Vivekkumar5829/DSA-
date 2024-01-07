@@ -26,4 +26,7 @@ public class BinarySearchTree {
         }
         return node.height;
     }
+ public boolean isEmpty(){
+        return root == null;
+    }
 }
