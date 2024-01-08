@@ -63,6 +63,12 @@ public void insert(int value){
         return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right);
     }
 
+  public void populate(int[] nums){
+        for(int i = 0; i < nums.length; i++){
+            this.insert(i);
+        }
+    }
+
  public void display(){
         display(this.root, "Root Node: ");
     }
