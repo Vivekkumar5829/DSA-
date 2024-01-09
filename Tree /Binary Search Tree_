@@ -69,6 +69,23 @@ public void insert(int value){
         }
     }
 
+
+
+    public void populatedSorted(int[] nums){
+        populatedSorted(nums,0,nums.length);
+    }
+
+    private void populatedSorted(int[] nums, int start, int end){
+        if(start <= end){
+            return;
+        }
+        int mid = (start + end) / 2;
+
+        this.insert(nums[mid]);
+        populatedSorted(nums, start, end);
+        populatedSorted(nums, mid + 1, end);
+    }
+
  public void display(){
         display(this.root, "Root Node: ");
     }
