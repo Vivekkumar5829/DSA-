@@ -75,5 +75,19 @@ private void display(Node node){
         }
     }
 
+    private int update(Node node, int index, int value){
+        if(index >= node.startInterval && index <= node.endInterval){
+            if(index == node.startInterval && index == node.endInterval){
+                node.data = value;
+                return node.data;
+            }else{
+                int leftAns = update(node.left, index, value);
+                int rightAns = update(node.right, index, value);
+                node.data = leftAns + rightAns;
+                return node.data;
+            }
+        }
+        return node.data;
+    }
 
 }
