@@ -1,0 +1,47 @@
+Counting Sort:--
+
+-The counting sort algorithm works by first creating a list of the counts or occurrences of each unique value in the list. It then creates a final sorted list based on the list of counts.
+-One important thing to remember is that counting sort can only be used when you know the range of possible values in the input beforehand.
+
+
+Code:--
+
+import java.util.Arrays;
+
+class Counting_Sort{
+    public static void main(String[] args) {
+        int[] arr = {5,2,5,5,3,1,2,5,1,5,0,5,3,1,5,2,2,2};
+        counting_sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    static void counting_sort(int[] arr){
+        int max = Arrays.stream(arr).max().getAsInt();
+        int min = Arrays.stream(arr).min().getAsInt();
+
+        int range = max - min + 1;
+        int[] count = new int[range];
+        for(int j : arr){
+            count[j - min]++;
+        }
+
+        for(int i = 1; i < count.length; i++){
+            count[i] += count[i - 1];
+        }
+
+        int[] output = new int[arr.length];
+        for(int i = arr.length - 1; i >= 0; i--){
+            output[count[arr[i] - min] - 1] = arr[i];
+            count[arr[i] - min]--;
+        }
+
+
+    System.arraycopy(output, 0, arr, 0, arr.length);
+}
+}
+
+Properties:--
+      -Space complexity: O(k)
+      -Best case performance: O(n+k)
+      -Average case performance: O(n+k)
+      -Worst case performance: O(n+k)
+      -Stable: Yes (k is the range of the elements in the array)
