@@ -1,0 +1,91 @@
+Merge Sort:--
+
+-Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves and then merges the two sorted halves. 
+-The major portion of the algorithm is given two sorted arrays, and we have to merge them into a single sorted array. 
+
+-The whole process of sorting an array of N integers can be summarized into three steps:--
+                                                                **Divide the array into two halves.
+                                                                **Sort the left half and the right half using the same recurring algorithm.
+                                                                **Merge the sorted halves.
+-There is something known as the Two Finger Algorithm that helps us merge two sorted arrays together. 
+-Using this subroutine and calling the merge sort function on the array halves recursively will give us the final sorted array we are looking for.
+
+-Since this is a recursion based algorithm, we have a recurrence relation for it. 
+
+-A recurrence relation is simply a way of representing a problem in terms of its subproblems.
+                                                                                              :-- T(n) = 2 * T(n / 2) + O(n)
+-Putting it in plain English, we break down the subproblem into two parts at every step and we have some linear amount of work that we have to do for merging the two sorted halves together at each step.
+
+Properties:--
+            Space Complexity: O(n)
+            Time Complexity: O(n*log(n)). The time complexity for the Merge Sort might not be obvious from the first glance. The log(n) factor that comes in is because of the recurrence                                                 relation we have mentioned before.
+            Sorting In Place: No in a typical implementation
+            Stable: Yes
+            Parallelizable :yes (Several parallel variants are discussed in the third edition of Cormen, Leiserson, Rivest, and Stein's Introduction to Algorithms.)
+
+
+
+                                                                 arr = {5,8,3,9,1,2}
+                                                            {5,9,3}                  {9,1,2}
+
+                                                      {5,8}       {3}            {9,1}      {2} 
+
+                                                    {5}    {8}                 {9}    {1}
+
+Merging                                                {5,8}                      {1,9}
+
+                                                            {3,5,8}                    {1,2,9}
+
+                                                     Sorted Array:--  {1,2,3,5,8,9}
+
+Code:--
+
+import java.util.Arrays;
+
+public class MergeSort{
+    public static void merge_Sort(int[] arr, int numberOfElements){
+        if(numberOfElements < 2){
+            return;
+        }
+        int mid = numberOfElements/2;
+        int[] leftArr = new int[mid];
+        int[] rightArr = new int[numberOfElements - mid];
+
+        for(int i = 0; i < mid; i++){
+            leftArr[i] = arr[i];
+        }
+
+        for(int i = mid; i < numberOfElements; i++){
+            rightArr[i - mid] = arr[i];
+        }
+        merge_Sort(leftArr,mid);
+        merge_Sort(rightArr, numberOfElements - mid);
+        merge(arr,leftArr,rightArr,mid,numberOfElements - mid);
+
+    }
+
+    private static void merge(int[] arr, int[] leftArr, int[] rightArr, int left, int right){
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < left && j < right){
+            if(leftArr[i] <= rightArr[j]){
+                arr[k++] = leftArr[i++];
+            }else{
+                arr[k++] = rightArr[j++];
+            }
+        }
+        while (i < left){
+            arr[k++] = leftArr[i++];
+        }
+        while (j < right){
+            arr[k++] = rightArr[j++];
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5,8,3,9,1,2};
+        merge_Sort(arr,arr.length);
+        System.out.println(Arrays.toString(arr));
+    }
+}
