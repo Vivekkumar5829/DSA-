@@ -1,0 +1,76 @@
+Radix Sort:--
+
+-QuickSort, MergeSort, and HeapSort are comparison-based sorting algorithms.
+-CountSort is not. It has the complexity of O(n+k), where k is the maximum element of the input array. So, if k is O(n), CountSort becomes linear sorting, which is better than comparison-based sorting algorithms that have O(nlogn) time complexity.
+-The idea is to extend the CountSort algorithm to get a better time complexity when k goes O(n2). Here comes the idea of Radix Sort.
+-All the elements should have the same number of digits.
+-In radix sort, we sort 1st at one's place, then the tenth's place then the hundredth's place.
+
+eg:-- arr = {121,432,564,23,1,45,288}
+
+arr		  Step1		        Step2 			    Step3				       Output
+		  One's Place	  Tenth's Place		Hundredth's Place	
+121	  	  121		       001			        001				          001
+432	    	001		       121		        	023				          023
+564		    432		       023			        045				          045	
+023		    023		       432			        121				          121
+001		    564		       045		        	432				          432
+045		    045		       564		        	564			          	564
+788		    788		       788			        788				          788
+										                                    Sorted Array
+
+
+
+Code:--
+
+import java.util.Arrays;
+public class RadixSort {
+    public static void main(String[] args) {
+        int[] arr = {121,432,564,23,1,45,288};
+        radixSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void countingSort(int[] arr, int place) {
+        int size = arr.length;
+        int max = Arrays.stream(arr).max().getAsInt();
+        int[] output = new int[size + 1];
+        int[] count = new int[max + 1];
+        for (int j : arr)
+            count[(j / place) % 10]++;
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+        for (int i = size - 1; i >= 0; i--) {
+            output[count[(arr[i] / place) % 10] - 1] = arr[i];
+            count[(arr[i] / place) % 10]--;
+        }
+
+        System.arraycopy(output, 0, arr, 0, size);
+    }
+    static void radixSort(int[] arr) {
+
+        boolean isNegative = false;
+        for (int i : arr) {
+            if (i < 0) {
+                isNegative = true;
+                break;
+            }
+        }
+
+        int min = 0;
+        if (isNegative) {
+            min = Arrays.stream(arr).min().getAsInt();
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] -= min;
+            }
+        }
+        int max = Arrays.stream(arr).max().getAsInt();
+        for (int place = 1; max / place > 0; place *= 10)
+            countingSort(arr, place);
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] += min;
+        }
+    }
+
+}
