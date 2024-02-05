@@ -1,0 +1,59 @@
+Search Algorithms:--
+
+--Search algorithms are the best tool to retrieve pieces of information from a data structure.
+--Searching algorithms are classified based on their mechanism of searching style. 
+
+We can classify them into two categories:--
+				(i). Sequential Search:--
+-Sequential Search algorithms are those who sequentially search a data structure, like linear Search
+				(ii). Interval Search:--
+ -We use interval search algorithms in sorted data structures. 
+-Comparision to linear searching these types of algorithms are more efficient and fast.
+-This type of search algorithm is Binary Search. 
+-Binary Search is also called half interval search because it divides the list into two-part after every step.
+
+1. Linear Search:--
+
+-Linear Search sequentially searches an array. It means Linear Search compares every element with the data, and after finding it returns that information.
+
+-A linear search starts from index 0 and compares every element of the array, and if it finds that elements, then it returns the index of that element in that array, and if it’s finds nothing, then we can set to None or null.
+					Time Complexity:-- Worst Case O(n)
+				       -- O(1) in the best case if the element is available on the 0th index of the array.
+		
+		
+class Practice{
+   	 public static void main(String[] args) {
+          	 int[] arr = {3,5,6,7,1,0,9};
+       		 System.out.println(linear_search(arr,7));
+    }
+    public static int linear_search(int[] arr, int target){
+        int n = arr.length;
+        for(int i = 0; i <= n - 1; i++){
+            if(arr[i] == target)
+                return i;
+        }
+        return -1;
+    }
+}
+
+		--let’s break the code. At first, we created a function linear_search that accepts two arguments, the first one is an array and the second one is the element that we want to search.
+
+Then it will loop through every element in the array, starting from index 0 to n-1, where n is the length of the array.
+
+ And if it finds the item, then it will return the index of the element and will exit from the loop and function. If it doesn’t find anything, then it will return None or -1.
+
+
+Q) When should use Linear Search?
+Ans. When we are dealing with a small dataset.
+When you are searching for a dataset stored in contiguous memory.
+
+Advantages of Linear Search:--
+
+-Linear search can be used irrespective of whether the array is sorted or not. It can be used on arrays of any data type.
+-Does not require any additional memory.
+-It is a well-suited algorithm for small datasets.
+
+Disadvantages of Linear Search:--
+
+-Linear search has a time complexity of O(N), which in turn makes it slow for large datasets.
+-Not suitable for large arrays.
