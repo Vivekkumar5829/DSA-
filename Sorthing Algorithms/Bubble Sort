@@ -1,0 +1,113 @@
+Sorting:--
+
+-Sorting algorithms are a set of instructions that take an array or list as an input and arrange the items into a particular order.
+-Sorts are most commonly in numerical or a form of alphabetical (or lexicographical) order, and can be in ascending (A-Z, 0-9) or descending (Z-A, 9-0) order.
+
+Sorting Algorithms are Important because:--
+				-Since they can often reduce the complexity of a problem, sorting algorithms are very important in computer science. 
+				-These algorithms have direct applications in searching algorithms, database algorithms, divide and conquer methods, data structure algorithms, and many more.
+
+
+Trade-Offs of Sorting Algorithms:--
+
+-When choosing a sorting algorithm, some questions have to be asked – How big is the collection being sorted? How much memory is available? Does the collection need to grow?
+-The answers to these questions may determine which algorithm is going to work best for each situation. 
+-Some algorithms like merge sort may need a lot of space or memory to run, while insertion sort is not always the fastest, but doesn't require many resources to run.
+-You should determine what your requirements are, and consider the limitations of your system before deciding which sorting algorithm to use.
+
+
+Classification of a Sorting Algorithm:--
+
+Sorting algorithms can be categorized based on the following parameters:
+
+							(i). The number of swaps or inversions required:-- 
+-This is the number of times the algorithm swaps elements to sort the input. Selection sort requires the minimum number of swaps.
+
+							(ii). The number of comparisons:--
+-This is the number of times the algorithm compares elements to sort the input. Using Big-O notation, the sorting algorithm examples listed above require at least O(nlogn) comparisons in the best case, and O(n^2) comparisons in the worst case for most of the outputs.
+
+							(iii). Whether or not they use recursion:-- 
+-Some sorting algorithms, such as quick sort, use recursive techniques to sort the input. Other sorting algorithms, such as selection sort or insertion sort, use non-recursive techniques. Finally, some sorting algorithms, such as merge sort, make use of both recursive as well as non-recursive techniques to sort the input.
+
+							(iV). Whether they are stable or unstable:--
+- Stable sorting algorithms maintain the relative order of elements with equal values, or keys. Unstable sorting algorithms do not maintain the relative order of elements with equal
+ values/keys.
+-For example, imagine you have the input array [1, 2, 3, 2, 4]. And to help differentiate between the two equal values, 2, let's update them to 2a and 2b, making the input array [1, 2a, 3, 2b, 4].
+-Stable sorting algorithms will maintain the order of 2a and 2b, meaning the output array will be [1, 2a, 2b, 3, 4]. Unstable sorting algorithms do not maintain the order of equal values, and the output array may be [1, 2b, 2a, 3, 4].
+-Insertion sort, merge sort, and bubble sort are stable. Heap sort and quick sort are unstable.
+
+   							(V). The amount of extra space required:--
+-Some sorting algorithms can sort a list without creating an entirely new list. These are known as in-place sorting algorithms, and require a constant O(1) extra space for sorting. Meanwhile, out of place sorting algorithms create a new list while sorting.
+-Insertion sort and quick sort are in place sorting algorithms, as elements are moved around a pivot point, and do not use a separate array.
+-Merge sort is an example of an out of place sorting algorithm, as the size of the input must be allocated beforehand to store the output during the sort process, which requires extra memory.
+
+
+Some Common Sorting Algorithms:--
+
+(i). Bubble Sort
+
+-Just like the way bubbles rise from the bottom of a glass, bubble sort is a simple algorithm that sorts a list, allowing either lower or higher values to bubble up to the top.
+-The algorithm traverses a list and compares adjacent values, swapping them if they are not in the correct order.
+
+Illustration:--
+				Given arr = {3,1,5,4,2}
+We are arranging the array
+in ascending order. 
+
+First Pass:--
+(3 > 1) swap 				{1,3,5,4,2}
+(3 > 5)					{1,3,5,4,2}
+(5 > 4) swap				{1,3,4,5,2}
+(5 > 2) swap				{1,3,4,2,5}
+
+Second Pass:--
+(1 > 3) 					{1,3,4,2,5}
+(3 > 4)						{1,3,4,2,5}
+(4 > 2) swap					{1,3,2,4,5}
+(4 > 5) 					{1,3,2,4,5}
+
+Third pass:-- 	
+(1 > 3)						{1,3,2,4,5}
+(3 > 2) swap					{1,2,3,4,5}
+				Sorted in ascending order.
+
+
+Code:-- 
+
+
+import java.util.Arrays;
+class Bubble_Sort {
+    public static void bubbleSort(int[] arr){
+        for(int i = 0; i <= arr.length - 1; i++){
+            for(int j =  1; j <= arr.length - i - 1; j++ ){
+                if(arr[j - 1] > arr[j]){
+                    int temp = arr[j - 1];
+                    arr[j - 1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+    public static void main(String args[])
+    {
+        int arr[] = { 2, 3, 4,5, 10,30,11,2, 40 };
+        bubbleSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+
+-With the first pass through the array largest element comes to the end.
+-With the second pass through the array second largest element is at second from the last index.
+-With the third pass through the array third largest element is at the third from the last index.
+
+- This will repeat until array is sorted in the given order.
+- It is also known as sinking/Exchange sort.
+
+Properties:--
+
+-Space complexity: O(1)
+-Best case performance: O(n)
+-Average case performance: O(n*n)
+-Worst case performance: O(n*n)
+-Stable: Yes
