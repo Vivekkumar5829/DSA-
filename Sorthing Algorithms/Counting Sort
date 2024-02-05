@@ -39,6 +39,57 @@ class Counting_Sort{
 }
 }
 
+
+
+// More Clear  and easy understable 
+ public  static int[] countSort(int[] nums){
+        int max = nums[0];
+        for (int i : nums){
+            if(i > max){
+                max = i;
+            }
+        }
+        int[] frenquency = new int[max + 1];
+        for(int j : nums){
+            frenquency[j]++;
+        }
+
+        int index = 0;
+        for(int i = 0; i < frenquency.length; i++){
+            while (frenquency[i] > 0){
+                nums[index] = i;
+                index++;
+                frenquency[i]--;
+            }
+        }
+        return nums;
+    }
+
+
+// Using HashMap
+    public static int[] countSort1(int[] nums){
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums){
+            map.put(num,map.getOrDefault(num,0) + 1);
+        }
+
+        int index = 0;
+        int min = Arrays.stream(nums).min().getAsInt();
+        int max = Arrays.stream(nums).max().getAsInt();
+
+        for (int i = min; i <= max; i++){
+            int count = map.getOrDefault(i,0);
+             for (int j = 0; j < count; j++){
+                 nums[index] = i;
+                 index++;
+             }
+        }
+        return nums;
+    }
+
 Properties:--
       -Space complexity: O(k)
       -Best case performance: O(n+k)
